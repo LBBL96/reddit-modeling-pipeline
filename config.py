@@ -1,15 +1,29 @@
 from pydantic_settings import BaseSettings
-from typing import Optional
 
 
 class Settings(BaseSettings):
-    twitter_api_key: str
-    twitter_api_secret: str
-    twitter_access_token: str
-    twitter_access_secret: str
+    """
+    Configuration for X API v2 Sentiment Analysis Pipeline
+    
+    X API v2 Filtered Stream Requirements:
+    - Bearer Token (App-Only) authentication - REQUIRED
+    - Developer App associated with a Project
+    - Minimum access level: Basic ($200/mo) for filtered stream
+    - Pro ($5000/mo) recommended for production (1M posts/month)
+    
+    Get credentials at: https://developer.x.com/en/portal/dashboard
+    """
+    
+    # X API v2 Bearer Token - REQUIRED for filtered stream
     twitter_bearer_token: str
     
-    wandb_api_key: Optional[str] = None
+    # Legacy OAuth 1.0a credentials (optional, for v1.1 endpoints only)
+    twitter_api_key: str = ""
+    twitter_api_secret: str = ""
+    twitter_access_token: str = ""
+    twitter_access_secret: str = ""
+    
+    wandb_api_key: str | None = None
     wandb_project: str = "twitter-sentiment-analysis"
     
     mlflow_tracking_uri: str = "http://localhost:5000"

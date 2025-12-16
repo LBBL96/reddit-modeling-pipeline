@@ -1,10 +1,10 @@
-# Twitter Sentiment Analysis Pipeline
+# X (Twitter) Sentiment Analysis Pipeline
 
-A comprehensive real-time sentiment analysis system for Twitter data with streaming ingestion, ML model training, automated retraining, and production-ready API deployment.
+A comprehensive real-time sentiment analysis system for X (formerly Twitter) data with streaming ingestion, ML model training, automated retraining, and production-ready API deployment.
 
 ## Features
 
-- **Real-Time Data Ingestion**: Stream tweets using Twitter API v2
+- **Real-Time Data Ingestion**: Stream posts using **X API v2 Filtered Stream** with Bearer Token authentication
 - **Text Preprocessing**: Advanced NLP preprocessing with emoji handling, URL removal, and tokenization
 - **Feature Engineering**: Extract meaningful features from text data
 - **Model Training**: Fine-tune BERT/transformer models (DistilBERT by default)
@@ -33,11 +33,16 @@ A comprehensive real-time sentiment analysis system for Twitter data with stream
 
 ## Prerequisites
 
-- Python 3.10+
+- Python 3.12+
 - PostgreSQL 15+
 - Redis 7+
 - Docker & Docker Compose (optional but recommended)
-- Twitter API credentials (API Key, Secret, Access Token, Bearer Token)
+- **X API v2 Access**:
+  - Developer account at https://developer.x.com/
+  - Developer App associated with a Project
+  - **Bearer Token** (App-Only authentication) - REQUIRED
+  - Minimum: Basic tier ($200/mo) for filtered stream access
+  - Recommended: Pro tier ($5000/mo) for production (1M posts/month)
 - Weights & Biases account (optional)
 
 ## Quick Start
@@ -67,11 +72,14 @@ cp .env.example .env
 ```
 
 Required environment variables:
-- `TWITTER_API_KEY`, `TWITTER_API_SECRET`, `TWITTER_ACCESS_TOKEN`, `TWITTER_ACCESS_SECRET`, `TWITTER_BEARER_TOKEN`
+- `TWITTER_BEARER_TOKEN` - **REQUIRED** for X API v2 filtered stream
 - `DATABASE_URL` (PostgreSQL connection string)
 - `REDIS_URL` (Redis connection string)
 - `MLFLOW_TRACKING_URI` (MLflow server URL)
 - `WANDB_API_KEY` (optional, for W&B tracking)
+
+Optional (only for v1.1 endpoints):
+- `TWITTER_API_KEY`, `TWITTER_API_SECRET`, `TWITTER_ACCESS_TOKEN`, `TWITTER_ACCESS_SECRET`
 
 ### 3. Initialize Database
 
